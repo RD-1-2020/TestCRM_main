@@ -129,25 +129,25 @@ namespace Prj_test.PageObjects
         protected static Product[] products = {
             new Product("'598'","КабельТест", "Кабель", "53", "100",2,
             new Product.answer[2]{
-                new Product.answer("368", "0,01","1-2 weeks","0","0","$"),
+                new Product.answer("368", rand_price(),"1-2 weeks","0","0","$"),
                 new Product.answer("228", "100","1-2 weeks","0","0","R")
             }
             ),
             new Product("'598'","РезисторТест", "Резистор", "132", "1",2,
             new Product.answer[2]{
-                new Product.answer("368", "0,007","1,5 weeks","0","0","$"),
+                new Product.answer("368", rand_price(),"1,5 weeks","0","0","$"),
                 new Product.answer("228", "10","1,5 weeks","0","0","R")
             }
             ),
             new Product("'598'","КонденсаторТест", "Конденсатор", "231", "1",2,
             new Product.answer[2]{
-                new Product.answer("368", "0,01","25","0","0","$"),
+                new Product.answer("368", rand_price(),"25","0","0","$"),
                 new Product.answer("228", "7","25","0","0","R")
             }
             ),
             new Product("'598'","Припой тест", "Припой", "440", "1000",2,
             new Product.answer[2]{
-                new Product.answer("368", "0,006","1 месяц","0","0","$"),
+                new Product.answer("368", rand_price(),"1 месяц","0","0","$"),
                 new Product.answer("228", "8","1 месяц","0","0","R")
             }
             )
