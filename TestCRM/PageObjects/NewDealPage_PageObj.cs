@@ -22,9 +22,9 @@ namespace Prj_test.PageObjects
         /// </summary>
         /// <returns>Redirect on a newdealpage</returns>
         public NewDealPage_PageObj fill_list0() {
-            _webDriver.FindElement(textarea_partno).SendKeys(deals[num_deal].products.partNo[3]);
-            _webDriver.FindElement(textarea_count).SendKeys(deals[num_deal].products.count[3]);
-            _webDriver.FindElement(textarea_category).SendKeys(deals[num_deal].products.category[3]);
+            _webDriver.FindElement(textarea_partno).SendKeys(products[3].PartNum);
+            _webDriver.FindElement(textarea_count).SendKeys(products[3].count);
+            _webDriver.FindElement(textarea_category).SendKeys(products[3].category);
             _webDriver.FindElement(button_add).Click();
             return new NewDealPage_PageObj(_webDriver, num_deal);
         }
@@ -72,8 +72,8 @@ namespace Prj_test.PageObjects
         /// <returns></returns>
         public NewDealPage_PageObj add_product0() {
             _webDriver.FindElement(button_product).Click();
-            _webDriver.FindElement(textarea_product_partno).SendKeys(deals[0].products.partNo[2]);
-            _webDriver.FindElement(textarea_product_count).SendKeys(deals[0].products.count[2]);
+            _webDriver.FindElement(textarea_product_partno).SendKeys(products[2].PartNum);
+            _webDriver.FindElement(textarea_product_count).SendKeys(products[2].count);
             _webDriver.FindElement(button_product_add).Click();
             return new NewDealPage_PageObj(_webDriver, 0);
         }
@@ -99,17 +99,17 @@ namespace Prj_test.PageObjects
         public bool partNo_assert() {
             try
             {
-                for (int i=0; i < deals[num_deal].products.partNo.Length; i++)
+                for (int i=0; i < products.Length; i++)
                 {
                     try
                     {
 
-                        _webDriver.FindElement(By.XPath("//span[text()='" + deals[num_deal].products.category[i] + " " + deals[num_deal].products.partNo[i] + "']"));
+                        _webDriver.FindElement(By.XPath("//span[text()='" + products[i].category + " " + products[i].PartNum + "']"));
 
                     }
                     catch (OpenQA.Selenium.NoSuchElementException)
                     {
-                        _webDriver.FindElement(By.XPath("//span[text()='" + "(без категории) " + deals[num_deal].products.partNo[i] + "']"));
+                        _webDriver.FindElement(By.XPath("//span[text()='" + "(без категории) " + products[i].PartNum + "']"));
                     }
                 }
                 return true;

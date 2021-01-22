@@ -46,14 +46,14 @@ namespace Prj_test.PageObjects
 
         //Работа с кучей товаров массивы строк
         
-        protected class Product
+        public class Product
         {
-            protected string id_client;
-            protected string PartNum;
-            protected string category;
-            protected string count;
-            protected string weight;
-            protected int n;
+            public string id_client;
+            public string PartNum;
+            public string category;
+            public string count;
+            public string weight;
+            public int n;
            public struct answer
             {
                 string id_provider;
@@ -62,20 +62,27 @@ namespace Prj_test.PageObjects
                 string add1;
                 string add2;
                 string curence;
+                
+                private static string rand_price()
+                {
+                    return ((new Random()).Next(101)).ToString();
+                }
+                private static string rand_delivery_time()
+                {
+                    return ((new Random()).Next(61)).ToString();
+                }
                 /// <summary>
                 /// Construct provider answer
                 /// </summary>
                 /// <param name="id_provider">Id in CRM provider</param>
-                /// <param name="price">Price product</param>
-                /// <param name="delivery_time">Delivery time</param>
                 /// <param name="add1">Addithional 1</param>
                 /// <param name="add2">Addithional 2</param>
                 /// <param name="curence">$ or rub</param>
-                public answer(string id_provider, string price, string delivery_time, string add1, string add2, string curence)
+                public answer(string id_provider,  string add1, string add2, string curence)
                 {
                     this.id_provider = id_provider;
-                    this.price = price;
-                    this.delivery_time = delivery_time;
+                    this.price = rand_price();
+                    this.delivery_time = rand_delivery_time();
                     this.add1 = add1;
                     this.add2 = add2;
                     this.curence = curence;
@@ -98,21 +105,23 @@ namespace Prj_test.PageObjects
                 }
             }
             protected answer answer_provider = new answer();
+            private static string rand_count() {
+                return (new Random()).Next(1001).ToString();
+            }
             /*string _id_providers, string _price, string _delivery_time, string _add1, string _add2, string _curence*/
             /// <summary>
             /// Product info
             /// </summary>
             /// <param name="_partnum">PratNumber</param>
             /// <param name="_category">Category</param>
-            /// <param name="_count">Amount</param>
             /// <param name="_weight">Weight</param>
             /// <param name="_n">Answers amount</param>
             /// <param name="answers">Answers array[_n]</param>
-            public Product(string _id_client,string _partnum, string _category, string _count, string _weight,int _n,answer[] answers) {
+            public Product(string _id_client,string _partnum, string _category, string _weight,int _n,answer[] answers) {
                 id_client = _id_client;
                 PartNum = _partnum;
                 category = _category;
-                count = _count;
+                count = rand_count();
                 weight = _weight;
                 n = _n;
                 for (int i = 0; i < _n; i++) {
@@ -120,43 +129,42 @@ namespace Prj_test.PageObjects
                 }
             }
         }
-        static  string rand_price() {
-            return ((new Random()).Next(101)/1000).ToString();
-        }
+
         /// <summary>
         /// products[a][b] - b is index of answer provider, and a is a product 
         /// </summary>
-        protected static Product[] products = {
-            new Product("'598'","КабельТест", "Кабель", "53", "100",2,
-            new Product.answer[2]{
-                new Product.answer("368", rand_price(),"1-2 weeks","0","0","$"),
-                new Product.answer("228", "100","1-2 weeks","0","0","R")
+        private static string[] client_id_s = { "'598'","'540'","'541'", "'542'" , "'543'" , "'544'" , "'545'" , "'546'" , "'547'" , "'548'" , "'549'" , "'550'" , "'551'" , "'552'" , "'553'" };
+        public static string client_id = client_id_s[(new Random()).Next(client_id_s.Length)];
+        private static string[] answers_Provider_id = { "368","474" };
+        private static int ans_amount = answers_Provider_id.Length;
+        public static Product[] products = {
+            new Product(client_id,"КабельТест", "Кабель", "100",ans_amount,
+            new Product.answer[]{
+                new Product.answer(answers_Provider_id[0], "0","0","$"),
+                new Product.answer(answers_Provider_id[1], "0","0","R")
             }
             ),
-            new Product("'598'","РезисторТест", "Резистор", "132", "1",2,
-            new Product.answer[2]{
-                new Product.answer("368", rand_price(),"1,5 weeks","0","0","$"),
-                new Product.answer("228", "10","1,5 weeks","0","0","R")
+            new Product(client_id,"РезисторТест", "Резистор", "1",ans_amount,
+            new Product.answer[]{
+                new Product.answer(answers_Provider_id[0], "0","0","$"),
+                new Product.answer(answers_Provider_id[1], "0","0","R")
             }
             ),
-            new Product("'598'","КонденсаторТест", "Конденсатор", "231", "1",2,
-            new Product.answer[2]{
-                new Product.answer("368", rand_price(),"25","0","0","$"),
-                new Product.answer("228", "7","25","0","0","R")
+            new Product(client_id,"КонденсаторТест", "Конденсатор", "1",ans_amount,
+            new Product.answer[]{
+                new Product.answer(answers_Provider_id[0], "0","0","$"),
+                new Product.answer(answers_Provider_id[1], "0","0","R")
             }
             ),
-            new Product("'598'","Припой тест", "Припой", "440", "1000",2,
-            new Product.answer[2]{
-                new Product.answer("368", rand_price(),"1 месяц","0","0","$"),
-                new Product.answer("228", "8","1 месяц","0","0","R")
+            new Product(client_id,"Припой тест", "Припой", "1000",ans_amount,
+            new Product.answer[]{
+                new Product.answer(answers_Provider_id[0],"0","0","$"),
+                new Product.answer(answers_Provider_id[1],"0","0","R")
             }
             )
             /*new Product("'598'","РезисторТест", "Резистор", "132", "1")*/
         };
         //Где используется работа с продуктами настроить работу с классом!
-        public static string[] deal0_PartNo = { "КабельТест","РезисторТест","КонденсаторТест","Припой тест"};
-        public static string[] deal0_category = { "Кабель", "Резистор", "Конденсатор", "Припой" };
-        public static string[] deal0_count = { "53", "132", "231", "440" };
         /// <summary>
         /// Deal with info about 
         /// </summary>
@@ -172,14 +180,15 @@ namespace Prj_test.PageObjects
             Assert.IsTrue(bodyText.IndexOf("Fatall Error") == -1, "body pf page have a fatall error");
             Assert.IsTrue(bodyText.IndexOf("Warning") == -1, "body pf page have a warning");
             Assert.IsTrue(bodyText.IndexOf("Error") == -1, "body pf page have a error");
-            IWebElement[] div_elements= new IWebElement[_webDriver.FindElements(By.XPath("//div[text()]")).Count];
+
+            /*IWebElement[] div_elements= new IWebElement[_webDriver.FindElements(By.XPath("//div[text()]")).Count];
             _webDriver.FindElements(By.XPath("//div[text()]")).CopyTo(div_elements, 0);
             for (int i = 0; i < div_elements.Length; i++) {
                 Assert.IsTrue(div_elements[i].Text.IndexOf("Notice") == -1, "div element in page have a notice");
                 Assert.IsTrue(div_elements[i].Text.IndexOf("Fatall Error") == -1, "div element in page have a fatall error");
                 Assert.IsTrue(div_elements[i].Text.IndexOf("Warning") == -1, "div element in page have a warning");
                 Assert.IsTrue(div_elements[i].Text.IndexOf("Error") == -1, "div element in page have a error");
-            }
+            }*/
         }
         /// <summary>
         /// click on button_deal
