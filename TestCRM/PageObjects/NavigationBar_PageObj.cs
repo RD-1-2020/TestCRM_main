@@ -46,6 +46,7 @@ namespace Prj_test.PageObjects
         
         protected class Product
         {
+            protected string id_client;
             protected string PartNum;
             protected string category;
             protected string count;
@@ -97,7 +98,7 @@ namespace Prj_test.PageObjects
             /// <param name="_weight">Weight</param>
             /// <param name="_n">Answers amount</param>
             /// <param name="answers">Answers array[_n]</param>
-            public Product(string _partnum, string _category, string _count, string _weight,int _n,answer[] answers) {
+            public Product(string _id_client,string _partnum, string _category, string _count, string _weight,int _n,answer[] answers) {
                 PartNum = _partnum;
                 category = _category;
                 count = _count;
@@ -112,7 +113,7 @@ namespace Prj_test.PageObjects
         /// products[a][b] - b is index of answer provider, and a is a product 
         /// </summary>
         protected static Product[] products = {
-            new Product("КабельТест", "Кабель", "53", "1",2,new Product.answer[2]{
+            new Product("'598'","КабельТест", "Кабель", "53", "1",2,new Product.answer[2]{
                 new Product.answer("368", "0,01","1-2 weeks","0","0","$"),
                 new Product.answer("228", "0,01","1-2 weeks","0","0","$")
             })
