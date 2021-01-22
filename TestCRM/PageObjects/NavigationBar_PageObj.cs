@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using OpenQA.Selenium;
+using NUnit.Framework;
 namespace Prj_test.PageObjects
 {
     /// <summary>
@@ -43,98 +44,66 @@ namespace Prj_test.PageObjects
         private readonly By button_warehouse_M15 = By.XPath("//a[text()='M15']");
 
         //Работа с кучей товаров массивы строк
-        
-        protected class Product
+        public class Product
         {
-            protected string PartNum;
-            protected string category;
-            protected string count;
-            protected string weight;
-            static int n;
-           public struct answer
+            public string[] partNo { get; set; }
+            public string[] category { get; set; }
+            public string[] count { get; set; }
+            public Product(string[] _partNo, string[] _category, string[] _count)
             {
-                string id_provider;
-                string price;
-                string delivery_time;
-                string add1;
-                string add2;
-                string curence;
-                
-                public answer(string id_provider, string price, string delivery_time, string add1, string add2, string curence)
-                {
-                    this.id_provider = id_provider;
-                    this.price = price;
-                    this.delivery_time = delivery_time;
-                    this.add1 = add1;
-                    this.add2 = add2;
-                    this.curence = curence;
-                }
-            }
-            private answer[] answers = new answer[10];
-            /// <summary>
-            /// Answers provider
-            /// </summary>
-            /// <param name="index"></param>
-            /// <returns></returns>
-            public answer this[int index] {
-                get
-                {
-                    return answers[index];
-                }
-                set
-                {
-                    answers[index] = value;
-                }
-            }
-            protected answer answer_provider = new answer();
-            /*string _id_providers, string _price, string _delivery_time, string _add1, string _add2, string _curence*/
-            /// <summary>
-            /// Product info
-            /// </summary>
-            /// <param name="_partnum">PratNumber</param>
-            /// <param name="_category">Category</param>
-            /// <param name="_count">Amount</param>
-            /// <param name="_weight">Weight</param>
-            /// <param name="_n">Answers amount</param>
-            /// <param name="answers">Answers array[_n]</param>
-            public Product(string _partnum, string _category, string _count, string _weight,int _n,answer[] answers) {
-                PartNum = _partnum;
+                partNo = _partNo;
                 category = _category;
                 count = _count;
-                weight = _weight;
-                n = _n;
-                for (int i = 0; i < _n; i++) {
-                    this.answers[i] = answers[i];  
-                }
             }
         }
-        /// <summary>
-        /// products[a][b] - b is index of answer provider, and a is a product 
-        /// </summary>
-        protected static Product[] products = {
-            new Product("КабельТест", "Кабель", "53", "1",2,new Product.answer[2]{
-                new Product.answer("368", "0,01","1-2 weeks","0","0","$"),
-                new Product.answer("228", "0,01","1-2 weeks","0","0","$")
-            })
-        };
-        //Где используется работа с продуктами настроить работу с классом!
-        public static string[] deal0_PartNo = { "КабельТест","РезисторТест","КонденсаторТест","Припой тест"};
+        public struct deal
+        {
+            public string id_client;
+            public string comment;
+            public Product products;
+            /// <summary>
+            /// Construct deal
+            /// </summary>
+            /// <param name="id_client">Client Id</param>
+            /// <param name="comment">Comment(rand)</param>
+            /// <param name="partNo">Product partNumber</param>
+            public deal(string id_client, string comment, string[] partNo, string[] category, string[] count)
+            {
+                this.id_client = id_client;
+                this.comment = comment;
+                products = new Product(partNo, category, count);
+            }
+        }
+
+        public static string[] deal0_PartNo = { "КабельТест", "РезисторТест", "КонденсаторТест", "Припой тест" };
         public static string[] deal0_category = { "Кабель", "Резистор", "Конденсатор", "Припой" };
         public static string[] deal0_count = { "53", "132", "231", "440" };
         /// <summary>
         /// Deal with info about 
         /// </summary>
+        public static deal[] deals = {
+            new deal("'598'","Comment",deal0_PartNo,deal0_category,deal0_count)
+        };
 
         private readonly By button_exit = By.XPath("//a[@href='index.php?log_out=now']");
-        
-        public NavigationBar_PageObj(IWebDriver webDriver) {
+
+        public NavigationBar_PageObj(IWebDriver webDriver)
+        {
             _webDriver = webDriver;
+            ///Check a body text
+            String bodyText = _webDriver.FindElement(By.TagName("body")).Text;
+            Assert.IsTrue(bodyText.IndexOf("Notice") == -1, "body pf page have a notice");
+            Assert.IsTrue(bodyText.IndexOf("Fatall Error") == -1, "body pf page have a fatall error");
+            Assert.IsTrue(bodyText.IndexOf("Warning") == -1, "body pf page have a warning");
+            Assert.IsTrue(bodyText.IndexOf("Error") == -1, "body pf page have a error");
         }
+
         /// <summary>
         /// click on button_deal
         /// </summary>
         /// <returns>Redirect on deal_page</returns>
-        public DealPage_PageObj go_to_deal() {
+        public DealPage_PageObj go_to_deal()
+        {
             _webDriver.FindElement(button_deal).Click();
             return new DealPage_PageObj(_webDriver);
         }
@@ -143,12 +112,14 @@ namespace Prj_test.PageObjects
         /// </summary>
         /// <param name="id">Id of a deal, which you create</param>
         /// <returns>Redirect on a supply page</returns>
-        public SupplyPage_PageObj go_to_supply(string id) {
+        public SupplyPage_PageObj go_to_supply(string id)
+        {
             _webDriver.FindElement(button_supply).Click();
             return new SupplyPage_PageObj(_webDriver, id);
         }
         //Доработать
-        public void go_to_manufactorer() {
+        public void go_to_manufactorer()
+        {
             _webDriver.FindElement(button_products).Click();
             _webDriver.FindElement(button_products_manufactorer).Click();
         }
@@ -156,62 +127,10 @@ namespace Prj_test.PageObjects
         /// exit now user
         /// </summary>
         /// <returns>Redirect from Login_frormPageobj</returns>
-        public LoginPage_PageObj exit() {
+        public LoginPage_PageObj exit()
+        {
             _webDriver.FindElement(button_exit).Click();
             return new LoginPage_PageObj(_webDriver);
         }
     }
 }
-/*protected class Product
-{
-    protected string PartNum;
-    protected string category;
-    protected string count;
-    protected string weight;
-    public struct answer
-    {
-        string id_provider;
-        string price;
-        string delivery_time;
-        string add1;
-        string add2;
-        string curence;
-        public answer(string id_provider, string price, string delivery_time, string add1, string add2, string curence)
-        {
-            this.id_provider = id_provider;
-            this.price = price;
-            this.delivery_time = delivery_time;
-            this.add1 = add1;
-            this.add2 = add2;
-            this.curence = curence;
-        }
-        public answer this[int index]
-        {
-            get
-            {
-                return new answer(id_provider, price, delivery_time, add1, add2, curence);
-            }
-            set { }
-        }
-    }
-    protected answer answer_provider = new answer();
-    *//*string _id_providers, string _price, string _delivery_time, string _add1, string _add2, string _curence*//*
-    public Product(string _partnum, string _category, string _count, string _weight, answer[] _answer)
-    {
-        PartNum = _partnum;
-        category = _category;
-        count = _count;
-        weight = _weight;
-        for (int i = 0; i < _answer.Length; i++)
-        {
-            answer_provider[i] = _answer[i];
-        }
-    }
-}
-protected static Product[] products = {
-            new Product("КабельТест", "Кабель", "53", "1",
-                new Product.answer[1] {
-                new Product.answer("368", "0,01","1-2 weeks","0","0","$")
-            }
-                )
-        };*/
