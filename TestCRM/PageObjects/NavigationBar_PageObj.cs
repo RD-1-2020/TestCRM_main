@@ -53,7 +53,7 @@ namespace Prj_test.PageObjects
             protected string category;
             protected string count;
             protected string weight;
-            static int n;
+            protected int n;
            public struct answer
             {
                 string id_provider;
@@ -62,7 +62,15 @@ namespace Prj_test.PageObjects
                 string add1;
                 string add2;
                 string curence;
-                
+                /// <summary>
+                /// Construct provider answer
+                /// </summary>
+                /// <param name="id_provider">Id in CRM provider</param>
+                /// <param name="price">Price product</param>
+                /// <param name="delivery_time">Delivery time</param>
+                /// <param name="add1">Addithional 1</param>
+                /// <param name="add2">Addithional 2</param>
+                /// <param name="curence">$ or rub</param>
                 public answer(string id_provider, string price, string delivery_time, string add1, string add2, string curence)
                 {
                     this.id_provider = id_provider;
@@ -110,19 +118,39 @@ namespace Prj_test.PageObjects
                 for (int i = 0; i < _n; i++) {
                     this.answers[i] = answers[i];  
                 }
-
             }
+        }
+        static  string rand_price() {
+            return ((new Random()).Next(101)/1000).ToString();
         }
         /// <summary>
         /// products[a][b] - b is index of answer provider, and a is a product 
         /// </summary>
         protected static Product[] products = {
-            new Product("'598'","КабельТест", "Кабель", "53", "1",2,
+            new Product("'598'","КабельТест", "Кабель", "53", "100",2,
             new Product.answer[2]{
                 new Product.answer("368", "0,01","1-2 weeks","0","0","$"),
-                new Product.answer("228", "0,01","1-2 weeks","0","0","$")
+                new Product.answer("228", "100","1-2 weeks","0","0","R")
             }
             ),
+            new Product("'598'","РезисторТест", "Резистор", "132", "1",2,
+            new Product.answer[2]{
+                new Product.answer("368", "0,007","1,5 weeks","0","0","$"),
+                new Product.answer("228", "10","1,5 weeks","0","0","R")
+            }
+            ),
+            new Product("'598'","КонденсаторТест", "Конденсатор", "231", "1",2,
+            new Product.answer[2]{
+                new Product.answer("368", "0,01","25","0","0","$"),
+                new Product.answer("228", "7","25","0","0","R")
+            }
+            ),
+            new Product("'598'","Припой тест", "Припой", "440", "1000",2,
+            new Product.answer[2]{
+                new Product.answer("368", "0,006","1 месяц","0","0","$"),
+                new Product.answer("228", "8","1 месяц","0","0","R")
+            }
+            )
             /*new Product("'598'","РезисторТест", "Резистор", "132", "1")*/
         };
         //Где используется работа с продуктами настроить работу с классом!
