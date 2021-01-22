@@ -36,7 +36,6 @@ namespace Prj_test
                 .send_request()
                 .partNo_assert(),
                 "Товар не добавлен к сделке");
-            Thread.Sleep(1000);
             //Execute id deals
             string deal_id = driver.FindElement(By.XPath("//input[@data-id='" + driver.Url.Substring(driver.Url.LastIndexOf("=") + 1) + "']")).GetAttribute("value");
             //Work with deal from it id on a deal page

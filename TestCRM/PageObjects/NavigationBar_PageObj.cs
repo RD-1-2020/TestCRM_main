@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Collections;
 using OpenQA.Selenium;
+using NUnit.Framework;
 namespace Prj_test.PageObjects
 {
     /// <summary>
@@ -99,6 +101,7 @@ namespace Prj_test.PageObjects
             /// <param name="_n">Answers amount</param>
             /// <param name="answers">Answers array[_n]</param>
             public Product(string _id_client,string _partnum, string _category, string _count, string _weight,int _n,answer[] answers) {
+                id_client = _id_client;
                 PartNum = _partnum;
                 category = _category;
                 count = _count;
@@ -107,16 +110,20 @@ namespace Prj_test.PageObjects
                 for (int i = 0; i < _n; i++) {
                     this.answers[i] = answers[i];  
                 }
+
             }
         }
         /// <summary>
         /// products[a][b] - b is index of answer provider, and a is a product 
         /// </summary>
         protected static Product[] products = {
-            new Product("'598'","КабельТест", "Кабель", "53", "1",2,new Product.answer[2]{
+            new Product("'598'","КабельТест", "Кабель", "53", "1",2,
+            new Product.answer[2]{
                 new Product.answer("368", "0,01","1-2 weeks","0","0","$"),
                 new Product.answer("228", "0,01","1-2 weeks","0","0","$")
-            })
+            }
+            ),
+            /*new Product("'598'","РезисторТест", "Резистор", "132", "1")*/
         };
         //Где используется работа с продуктами настроить работу с классом!
         public static string[] deal0_PartNo = { "КабельТест","РезисторТест","КонденсаторТест","Припой тест"};
@@ -130,6 +137,21 @@ namespace Prj_test.PageObjects
         
         public NavigationBar_PageObj(IWebDriver webDriver) {
             _webDriver = webDriver;
+
+            ///Check a body text
+            String bodyText = _webDriver.FindElement(By.TagName("body")).Text;
+            Assert.IsTrue(bodyText.IndexOf("Notice") == -1, "body pf page have a notice");
+            Assert.IsTrue(bodyText.IndexOf("Fatall Error") == -1, "body pf page have a fatall error");
+            Assert.IsTrue(bodyText.IndexOf("Warning") == -1, "body pf page have a warning");
+            Assert.IsTrue(bodyText.IndexOf("Error") == -1, "body pf page have a error");
+            IWebElement[] div_elements= new IWebElement[_webDriver.FindElements(By.XPath("//div[text()]")).Count];
+            _webDriver.FindElements(By.XPath("//div[text()]")).CopyTo(div_elements, 0);
+            for (int i = 0; i < div_elements.Length; i++) {
+                Assert.IsTrue(div_elements[i].Text.IndexOf("Notice") == -1, "div element in page have a notice");
+                Assert.IsTrue(div_elements[i].Text.IndexOf("Fatall Error") == -1, "div element in page have a fatall error");
+                Assert.IsTrue(div_elements[i].Text.IndexOf("Warning") == -1, "div element in page have a warning");
+                Assert.IsTrue(div_elements[i].Text.IndexOf("Error") == -1, "div element in page have a error");
+            }
         }
         /// <summary>
         /// click on button_deal
