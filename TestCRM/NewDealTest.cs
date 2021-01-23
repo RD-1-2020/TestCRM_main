@@ -17,16 +17,14 @@ namespace TestCRM
         [Test]
         public void Test1()
         {
-            Assert.True(new LoginPage_PageObj(driver).Sign_in(0)
+            new LoginPage_PageObj(driver).Sign_in(0)
                 .go_to_deal()
                 .New_Deal()
                 .fill_newdeal_form()
                 .add_deal()
-                .add_product0()
+                .add_product()
                 .add_product_list()
-                .fill_list0()
-                .partNo_assert(), 
-                "Товар не добавлен к сделке");
+                .fill_list();
             Assert.Pass("Партномер товара соответствует партномеру указаному в структуре в новой сделке 0");
         }
         [TearDown]

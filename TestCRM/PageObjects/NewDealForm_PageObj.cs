@@ -17,11 +17,9 @@ namespace Prj_test.PageObjects
         /// <summary>
         /// Number deal 
         /// </summary>
-        private int num_deal;
         private IWebDriver _webDriver;
-        public NewDealForm_PageObj(IWebDriver webDriver, int _numdeal) {
+        public NewDealForm_PageObj(IWebDriver webDriver) {
             _webDriver = webDriver;
-            num_deal = _numdeal;
 
         }
         /// <summary>
@@ -39,7 +37,7 @@ namespace Prj_test.PageObjects
                 _webDriver.FindElement(area_product).SendKeys(NavigationBar_PageObj.products[i].PartNum +
                     "*" + NavigationBar_PageObj.products[i].count + "\n");
             }
-            return new NewDealForm_PageObj(_webDriver, num_deal);
+            return new NewDealForm_PageObj(_webDriver);
         }
         /// <summary>
         /// Post deal fill add deal
@@ -47,7 +45,7 @@ namespace Prj_test.PageObjects
         /// <returns>Redirect on a deal page</returns>
         public NewDealPage_PageObj add_deal() {
             _webDriver.FindElement(button_new_deal).Click();
-            return new NewDealPage_PageObj(_webDriver, num_deal);
+            return new NewDealPage_PageObj(_webDriver);
         } 
     }
 }

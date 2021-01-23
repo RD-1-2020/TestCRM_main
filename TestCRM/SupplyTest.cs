@@ -24,7 +24,7 @@ namespace Prj_test
         {
             LoginPage_PageObj login_Form = new LoginPage_PageObj(driver);
             //Create deal 
-            Assert.True(login_Form.Sign_in(0)
+            login_Form.Sign_in(0)
                 .go_to_deal()
                 .New_Deal()
                 .fill_newdeal_form()
@@ -33,9 +33,7 @@ namespace Prj_test
                 .add_product_list()
                 .fill_list()
                 .request_supply()
-                .send_request()
-                .partNo_assert(),
-                "Товар не добавлен к сделке");
+                .send_request();
             //Execute id deals
             string deal_id = driver.FindElement(By.XPath("//input[@data-id='" + driver.Url.Substring(driver.Url.LastIndexOf("=") + 1) + "']")).GetAttribute("value");
             //Work with deal from it id on a deal page
