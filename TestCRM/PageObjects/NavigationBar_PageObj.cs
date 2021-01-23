@@ -176,10 +176,10 @@ namespace Prj_test.PageObjects
 
             ///Check a body text
             String bodyText = _webDriver.FindElement(By.TagName("body")).Text;
-            Assert.IsTrue(bodyText.IndexOf("Notice") == -1, "body pf page have a notice");
-            Assert.IsTrue(bodyText.IndexOf("Fatall Error") == -1, "body pf page have a fatall error");
-            Assert.IsTrue(bodyText.IndexOf("Warning") == -1, "body pf page have a warning");
-            Assert.IsTrue(bodyText.IndexOf("Error") == -1, "body pf page have a error");
+            Assert.IsTrue(bodyText.IndexOf("Notice") == -1, "body page have a notice");
+            Assert.IsTrue(bodyText.IndexOf("Fatall Error") == -1, "body page have a fatall error");
+            Assert.IsTrue(bodyText.IndexOf("Warning") == -1, "body page have a warning");
+            Assert.IsTrue(bodyText.IndexOf("Error") == -1, "body page have a error");
 
             /*IWebElement[] div_elements= new IWebElement[_webDriver.FindElements(By.XPath("//div[text()]")).Count];
             _webDriver.FindElements(By.XPath("//div[text()]")).CopyTo(div_elements, 0);
