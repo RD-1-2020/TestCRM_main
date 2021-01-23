@@ -29,9 +29,9 @@ namespace Prj_test
                 .New_Deal()
                 .fill_newdeal_form()
                 .add_deal()
-                .add_product0()
+                .add_product()
                 .add_product_list()
-                .fill_list0()
+                .fill_list()
                 .request_supply()
                 .send_request()
                 .partNo_assert(),
@@ -39,7 +39,7 @@ namespace Prj_test
             //Execute id deals
             string deal_id = driver.FindElement(By.XPath("//input[@data-id='" + driver.Url.Substring(driver.Url.LastIndexOf("=") + 1) + "']")).GetAttribute("value");
             //Work with deal from it id on a deal page
-            (new NewDealPage_PageObj(driver, 0))
+            (new NewDealPage_PageObj(driver))
                 .exit()
                 .Sign_in(1)
                 .go_to_supply(deal_id)
