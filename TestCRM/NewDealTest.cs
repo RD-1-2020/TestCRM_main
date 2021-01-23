@@ -19,7 +19,7 @@ namespace TestCRM
         {
             Assert.True(new LoginPage_PageObj(driver).Sign_in(0)
                 .go_to_deal()
-                .New_Deal0()
+                .New_Deal()
                 .fill_newdeal_form()
                 .add_deal()
                 .add_product0()

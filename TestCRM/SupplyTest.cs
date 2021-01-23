@@ -26,7 +26,7 @@ namespace Prj_test
             //Create deal 
             Assert.True(login_Form.Sign_in(0)
                 .go_to_deal()
-                .New_Deal0()
+                .New_Deal()
                 .fill_newdeal_form()
                 .add_deal()
                 .add_product0()

@@ -16,7 +16,7 @@ namespace Prj_test.PageObjects
         /// Do new deal
         /// </summary>
         /// <returns>redirect newdealform</returns>
-        public NewDealForm_PageObj New_Deal0() {
+        public NewDealForm_PageObj New_Deal() {
             _webDriver.FindElement(button_newdeal).Click();
             return new NewDealForm_PageObj(_webDriver, 0);
         }

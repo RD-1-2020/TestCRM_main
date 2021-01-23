@@ -133,7 +133,15 @@ namespace Prj_test.PageObjects
         /// <summary>
         /// products[a][b] - b is index of answer provider, and a is a product 
         /// </summary>
-        private static string[] client_id_s = { "'598'","'540'","'541'", "'542'" , "'543'" , "'544'" , "'545'" , "'546'" , "'547'" , "'548'" , "'549'" , "'550'" , "'551'" , "'552'" , "'553'" };
+        private static string[] client_id_s = {
+                "'598'","'540'","'541'", "'542'"
+                , "'543'" , "'544'" , "'545'" , "'546'" , "'547'" 
+                , "'548'" , "'549'" , "'550'","'551'", "'552'"
+                , "'553'" , "'554'" , "'555'" , "'556'" , "'557'"
+                , "'558'" , "'559'" ,"'561'", "'562'"
+                , "'563'" , "'564'" , "'565'" , "'566'" , "'567'"
+                , "'568'" , "'569'" , "'570'", "'571'","'572'","'573'","'574'"
+        };
         public static string client_id = client_id_s[(new Random()).Next(client_id_s.Length)];
         private static string[] answers_Provider_id = { "368","474" };
         private static int ans_amount = answers_Provider_id.Length;
@@ -157,6 +165,30 @@ namespace Prj_test.PageObjects
             }
             ),
             new Product(client_id,"Припой тест", "Припой", "1000",ans_amount,
+            new Product.answer[]{
+                new Product.answer(answers_Provider_id[0],"0","0","$"),
+                new Product.answer(answers_Provider_id[1],"0","0","R")
+            }
+            ),
+            new Product(client_id,"BAS521", "Диод", "0,05",ans_amount,
+            new Product.answer[]{
+                new Product.answer(answers_Provider_id[0],"0","0","$"),
+                new Product.answer(answers_Provider_id[1],"0","0","R")
+            }
+            ),
+            new Product(client_id,"0 Ом+-5%", "Чип резистор", "0,01",ans_amount,
+            new Product.answer[]{
+                new Product.answer(answers_Provider_id[0],"0","0","$"),
+                new Product.answer(answers_Provider_id[1],"0","0","R")
+            }
+            ),
+            new Product(client_id,"(CCC-25G), сеч.28AWG", "Кабель", "500",ans_amount,
+            new Product.answer[]{
+                new Product.answer(answers_Provider_id[0],"0","0","$"),
+                new Product.answer(answers_Provider_id[1],"0","0","R")
+            }
+            ),
+             new Product(client_id,"(RT0603BRD07619RL)", "Реле", "23",ans_amount,
             new Product.answer[]{
                 new Product.answer(answers_Provider_id[0],"0","0","$"),
                 new Product.answer(answers_Provider_id[1],"0","0","R")
