@@ -31,7 +31,6 @@ namespace Prj_test.PageObjects
         /// <returns></returns>
         
         public NewDealForm_PageObj fill_newdeal_form() {
-            Thread.Sleep(1000);
             _webDriver.FindElement(list_client).Click();
             _webDriver.FindElement(By.XPath("//div[@data-id="+ NavigationBar_PageObj.client_id+"]")).Click();
             _webDriver.FindElement(area_comment).SendKeys("Comment");
