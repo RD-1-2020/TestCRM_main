@@ -29,7 +29,7 @@ namespace Prj_test
                 .New_Deal()
                 .fill_newdeal_form()
                 .add_deal()
-                .add_product()
+                .add_product()//Реализовать превязку каждого цикла добавления товаров к длинне массива с товарами
                 .add_product_list()
                 .fill_list()
                 .request_supply()
