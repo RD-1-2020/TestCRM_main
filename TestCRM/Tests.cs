@@ -74,10 +74,17 @@ namespace TestCRM
                 .take_in_work();
         }
         [Test]
-        public void NewWindowTest(){
+        public void NewWindowDealTest(){
             (new LoginPage_PageObj(_webDriver)).Sign_in(0)
                     .go_to_deal()
-                    .New_Deal();
+                    .New_Deal()
+                    .check_all_Div()
+                    .fill_newdeal_form()
+                    .add_deal()
+                    .add_product()
+                    .add_product_list()
+                    .check_all_Div()
+                    .fill_list();
         }
         [TearDown]
         public void TearDown()

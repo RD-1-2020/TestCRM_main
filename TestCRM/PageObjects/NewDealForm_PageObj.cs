@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using OpenQA.Selenium;
+using NUnit.Framework;
 using System.Threading;
 namespace PageObjSpace
 {
@@ -20,7 +21,11 @@ namespace PageObjSpace
         public NewDealForm_PageObj(IWebDriver webDriver) : base(webDriver)
         {
         }
-
+        
+        public NewDealForm_PageObj check_all_Div() {
+            check_div(_webDriver);
+            return new NewDealForm_PageObj(_webDriver);
+        }
         /// <summary>
         /// Fill new deal form
         /// </summary>

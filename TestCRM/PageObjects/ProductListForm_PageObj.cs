@@ -29,6 +29,11 @@ namespace PageObjSpace
             _webDriver.FindElement(button_add).Click();
             return new NewDealPage_PageObj(_webDriver);
         }
+        public ProductListForm_PageObj check_all_Div()
+        {
+            check_div(_webDriver);
+            return new ProductListForm_PageObj(_webDriver);
+        }
     }
 
     

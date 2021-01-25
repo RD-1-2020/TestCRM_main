@@ -5,6 +5,7 @@ using OpenQA.Selenium;
 using NUnit.Framework;
 namespace PageObjSpace
 {
+    
     /// <summary>
     /// Navigation bar
     /// </summary>
@@ -44,7 +45,6 @@ namespace PageObjSpace
         private readonly By button_warehouse_M15 = By.XPath("//a[text()='M15']");
 
         //Работа с кучей товаров массивы строк
-
         public class Product
         {
             public string id_client;
@@ -239,6 +239,19 @@ namespace PageObjSpace
                 Assert.IsTrue(div_elements[i].Text.IndexOf("Error") == -1, "div element in page have a error");
             }*/
         }
+
+        protected static void check_div(IWebDriver _webDriver) {
+            IWebElement[] div_inside = new IWebElement[_webDriver.FindElements(By.XPath("/html/body/div[@class='window__shadow js-window__shadow']//div")).Count];
+            _webDriver.FindElements(By.XPath("/html/body/div[@class='window__shadow js-window__shadow']//div")).CopyTo(div_inside, 0);
+            for (int i = 0; i < div_inside.Length; i++)
+            {
+                Assert.IsTrue(div_inside[i].Text.IndexOf("Notice") == -1, "new deal form have a notice");
+                Assert.IsTrue(div_inside[i].Text.IndexOf("Fatall Error") == -1, "new deal form have a fatall error");
+                Assert.IsTrue(div_inside[i].Text.IndexOf("Warning") == -1, "new deal form have a warning");
+                Assert.IsTrue(div_inside[i].Text.IndexOf("Error") == -1, "new deal form have a error");
+            }
+        }
+
         protected string rand_string(int length)
         {
             string drink = "";
