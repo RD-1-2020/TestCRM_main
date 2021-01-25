@@ -7,12 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="PageObjects\**" />
-    <EmbeddedResource Remove="PageObjects\**" />
-    <None Remove="PageObjects\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Remove="LoginTest.cs" />
     <Compile Remove="SupplyTest.cs" />
     <Compile Remove="TestTamplates.cs" />

@@ -73,6 +73,8 @@ namespace TestCRM
                 .open_supply_deal()
                 .take_in_work();
         }
+        [Test]
+        public void NewWindowTest(){}
         [TearDown]
         public void TearDown()
         {
