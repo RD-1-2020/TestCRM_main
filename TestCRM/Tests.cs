@@ -2,22 +2,23 @@
 using OpenQA.Selenium;
 using PageObjSpace;
 using System.Threading;
+
 namespace TestCRM
 {
     public class Tests
     {
-        private IWebDriver driver;
+        private IWebDriver _webDriver;
         [SetUp]
         public void Setup()
         {
-            driver = new OpenQA.Selenium.Firefox.FirefoxDriver();
-            driver.Navigate().GoToUrl("http://crm.sibelcom.tech/");
-            driver.Manage().Window.Maximize();
+            _webDriver = new OpenQA.Selenium.Firefox.FirefoxDriver();
+            _webDriver.Navigate().GoToUrl("http://crm.sibelcom.tech/");
+            _webDriver.Manage().Window.Maximize();
         }
         [Test]
         public void Login_Test()
         {
-            LoginPage_PageObj login_Form = new LoginPage_PageObj(driver);
+            LoginPage_PageObj login_Form = new LoginPage_PageObj(_webDriver);
             for (int i = 0; i < login_Form.Length; i++)
             {
                 try
@@ -37,7 +38,7 @@ namespace TestCRM
         [Test]
         public void NewDealTest()
         {
-            new LoginPage_PageObj(driver).Sign_in(0)
+            new LoginPage_PageObj(_webDriver).Sign_in(0)
                 .go_to_deal()
                 .New_Deal()
                 .fill_newdeal_form()
@@ -50,7 +51,7 @@ namespace TestCRM
         [Test]
         public void SupplyTest()
         {
-            LoginPage_PageObj login_Form = new LoginPage_PageObj(driver);
+            LoginPage_PageObj login_Form = new LoginPage_PageObj(_webDriver);
             //Create deal 
             login_Form.Sign_in(0)
                 .go_to_deal()
@@ -63,9 +64,9 @@ namespace TestCRM
                 .request_supply()
                 .send_request();
             //Execute id deals
-            string deal_id = driver.FindElement(By.XPath("//input[@data-id='" + driver.Url.Substring(driver.Url.LastIndexOf("=") + 1) + "']")).GetAttribute("value");
+            string deal_id = _webDriver.FindElement(By.XPath("//input[@data-id='" + _webDriver.Url.Substring(_webDriver.Url.LastIndexOf("=") + 1) + "']")).GetAttribute("value");
             //Work with deal from it id on a deal page
-            (new NewDealPage_PageObj(driver))
+            (new NewDealPage_PageObj(_webDriver))
                 .exit()
                 .Sign_in(1)
                 .go_to_supply(deal_id)
@@ -75,7 +76,7 @@ namespace TestCRM
         [TearDown]
         public void TearDown()
         {
-            driver.Quit();
+            _webDriver.Quit();
             //закрытие
         }
     }
