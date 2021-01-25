@@ -30,7 +30,7 @@ namespace TestCRM
                 }
                 catch (OpenQA.Selenium.NoSuchElementException)
                 {
-                    Assert.IsTrue(false, LoginPage_PageObj.Logs.arr_data[i].email + " " + LoginPage_PageObj.Logs.arr_data[i].email + " - is not valid data!");
+                    Assert.IsTrue(false, LoginPage_PageObj.arr_data[i].email + " " + LoginPage_PageObj.arr_data[i].pass + " - is not valid data!");
                 }
             }
             Assert.Pass();

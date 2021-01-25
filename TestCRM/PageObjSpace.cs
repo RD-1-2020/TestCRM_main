@@ -15,32 +15,31 @@ namespace PageObjSpace
         /// <summary>
         /// User Data for Test
         /// </summary>
-        public static class Logs
+        public struct data
         {
-
-            public struct data
-            {
-                public string email;
-                public string pass;
-                /// <summary>
-                /// Construct struct user data
-                /// </summary>
-                /// <param name="_email">Email user</param>
-                /// <param name="_pass">Password user</param>
-                public data(string _email, string _pass)
-                {
-                    email = _email;
-                    pass = _pass;
-                }
-            }
+            public string email;
+            public string pass;
             /// <summary>
-            /// Users data array
+            /// Construct struct user data
             /// </summary>
-            static public data[] arr_data ={
+            /// <param name="_email">Email user</param>
+            /// <param name="_pass">Password user</param>
+            public data(string _email, string _pass)
+            {
+                email = _email;
+                pass = _pass;
+            }
+        }
+        /// <summary>
+        /// Users data array
+        /// </summary>
+        public static data[] arr_data ={
             new data("testing@sibelcom54.com","Test2020!"),
             new data("testing_2@sibelcom54.com","Test2020!"),
-        };
-        }
+            //Кабаков Станислав, менеджер по продажам
+            new data("sk@sibelcom54.com","2206SK"),
+            //Глушкова Софья, снабжение
+            new data("gs@sibelcom54.com","Gs3007"), };
         /// <summary>
         /// Length Data array(Login_FormPageObj/@class=log)
         /// </summary>
@@ -54,7 +53,7 @@ namespace PageObjSpace
         public LoginPage_PageObj(IWebDriver webDriver)
         {
             _webDriver = webDriver;
-            Length = Logs.arr_data.Length;
+            Length = arr_data.Length;
         }
         /// <summary>
         /// Sign in 
@@ -63,8 +62,8 @@ namespace PageObjSpace
         /// <returns></returns>
         public NavigationBar_PageObj Sign_in(int num)
         {
-            _webDriver.FindElement(input_email).SendKeys(Logs.arr_data[num].email);
-            _webDriver.FindElement(input_pass).SendKeys(Logs.arr_data[num].pass);
+            _webDriver.FindElement(input_email).SendKeys(arr_data[num].email);
+            _webDriver.FindElement(input_pass).SendKeys(arr_data[num].pass);
             _webDriver.FindElement(button_sign).Click();
             return new CalendarPage_PageObj(_webDriver);
         }
@@ -213,7 +212,7 @@ namespace PageObjSpace
             public static string client_id = client_id_s[(new Random()).Next(client_id_s.Length)];
             private static string[] answers_Provider_id = { "368", "474" };
             private static int ans_amount = answers_Provider_id.Length;
-            public static Product[] products = {
+            protected static Product[] products = {
             new Product(client_id,"КабельТест", "Кабель", "100",ans_amount,
             new Product.answer[]{
                 new Product.answer(answers_Provider_id[0], "0","0","$"),
@@ -365,7 +364,7 @@ namespace PageObjSpace
         /// <returns>Redirect on a newdealpage</returns>
         public NewDealPage_PageObj fill_list()
         {
-            for (int i = new Random().Next(NavigationBar_PageObj.products.Length * 2 / 3, NavigationBar_PageObj.products.Length); i < NavigationBar_PageObj.products.Length; i++)
+            for (int i = new Random().Next(products.Length * 2 / 3,products.Length); i < products.Length; i++)
             {
                 _webDriver.FindElement(textarea_partno).SendKeys(products[i].PartNum + "\n");
                 _webDriver.FindElement(textarea_count).SendKeys(products[i].count + "\n");
@@ -392,7 +391,6 @@ namespace PageObjSpace
         /// <summary>
         /// номер сделки
         /// </summary>
-        private int num_deal;
         public NewDealPage_PageObj(IWebDriver webDriver) : base(webDriver)
         {
         }
@@ -413,7 +411,7 @@ namespace PageObjSpace
         {
             _webDriver.FindElement(button_supply).Click();
             _webDriver.FindElement(button_supply_request).Click();
-            return new SupplyForm_PageObj(_webDriver, num_deal);
+            return new SupplyForm_PageObj(_webDriver);
         }
         /// <summary>
         /// Add product on page
@@ -421,7 +419,7 @@ namespace PageObjSpace
         /// <returns></returns>
         public NewDealPage_PageObj add_product()
         {
-            for (int i = new Random().Next(NavigationBar_PageObj.products.Length / 3, NavigationBar_PageObj.products.Length * 2 / 3); i < NavigationBar_PageObj.products.Length * 2 / 3; i++)
+            for (int i = new Random().Next(products.Length / 3, products.Length * 2 / 3); i < products.Length * 2 / 3; i++)
             {
                 _webDriver.FindElement(button_product).Click();
                 _webDriver.FindElement(textarea_product_partno).SendKeys(products[i].PartNum);
@@ -483,7 +481,7 @@ namespace PageObjSpace
     {
         private IWebDriver _webDriver;
         private readonly By button_request_send = By.XPath("//input[@value='Создать заявку']");
-        public SupplyForm_PageObj(IWebDriver webDriver, int _num_deal)
+        public SupplyForm_PageObj(IWebDriver webDriver)
         {
             _webDriver = webDriver;
         }
@@ -500,7 +498,7 @@ namespace PageObjSpace
     /// <summary>
     /// Button add new deal include this form
     /// </summary>
-    public class NewDealForm_PageObj
+    public class NewDealForm_PageObj : NavigationBar_PageObj
         {
             //Execute numdeal element
             private readonly By input_numdeal = By.XPath("//input[@id='undefined-title']");
@@ -512,27 +510,22 @@ namespace PageObjSpace
             /// <summary>
             /// Number deal 
             /// </summary>
-            private IWebDriver _webDriver;
-            public NewDealForm_PageObj(IWebDriver webDriver)
+            public NewDealForm_PageObj(IWebDriver webDriver) : base(webDriver)
             {
-                _webDriver = webDriver;
-
             }
             /// <summary>
             /// Fill new deal form
             /// </summary>
-            /// <param name="numdeal">Number deal from deals(NavigationBar_PageObj)</param>
             /// <returns></returns>
-
             public NewDealForm_PageObj fill_newdeal_form()
             {
                 _webDriver.FindElement(list_client).Click();
-                _webDriver.FindElement(By.XPath("//div[@data-id=" + NavigationBar_PageObj.client_id + "]")).Click();
+                _webDriver.FindElement(By.XPath("//div[@data-id=" + client_id + "]")).Click();
                 _webDriver.FindElement(area_comment).SendKeys("Comment");
-                for (int i = new Random().Next(NavigationBar_PageObj.products.Length / 3); i < NavigationBar_PageObj.products.Length / 3; i++)
+                for (int i = new Random().Next(products.Length / 3); i < products.Length / 3; i++)
                 {
-                    _webDriver.FindElement(area_product).SendKeys(NavigationBar_PageObj.products[i].PartNum +
-                        "*" + NavigationBar_PageObj.products[i].count + "\n");
+                    _webDriver.FindElement(area_product).SendKeys(products[i].PartNum +
+                        "*" + products[i].count + "\n");
                 }
                 return new NewDealForm_PageObj(_webDriver);
             }
