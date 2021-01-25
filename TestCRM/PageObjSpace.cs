@@ -272,14 +272,15 @@ namespace PageObjSpace
                 new Product.answer(answers_Provider_id[0],"0","0","$"),
                 new Product.answer(answers_Provider_id[1],"0","0","R")
             }
-            )
+            ),
+             new Product(client_id,"LVR025K", "Предохранитель", "0.5",ans_amount,
+            new Product.answer[]{
+                new Product.answer(answers_Provider_id[0],"0","0","$"),
+                new Product.answer(answers_Provider_id[1],"0","0","R")
+            }
+            ),
             /*new Product("'598'","РезисторТест", "Резистор", "132", "1")*/
         };
-            //Где используется работа с продуктами настроить работу с классом!
-            /// <summary>
-            /// Deal with info about 
-            /// </summary>
-
             private readonly By button_exit = By.XPath("//a[@href='index.php?log_out=now']");
 
             public NavigationBar_PageObj(IWebDriver webDriver)
@@ -302,11 +303,20 @@ namespace PageObjSpace
                     Assert.IsTrue(div_elements[i].Text.IndexOf("Error") == -1, "div element in page have a error");
                 }*/
             }
-            /// <summary>
-            /// click on button_deal
-            /// </summary>
-            /// <returns>Redirect on deal_page</returns>
-            public DealPage_PageObj go_to_deal()
+            protected string rand_string(int length)
+                {
+            string drink = "";
+            for (int i = 0; i < length; i++)
+            {
+                drink += (char)new Random().Next(32, 127);
+            }
+            return drink;
+            }
+        /// <summary>
+        /// click on button_deal
+        /// </summary>
+        /// <returns>Redirect on deal_page</returns>
+        public DealPage_PageObj go_to_deal()
             {
                 _webDriver.FindElement(button_deal).Click();
                 return new DealPage_PageObj(_webDriver);
@@ -513,6 +523,7 @@ namespace PageObjSpace
             public NewDealForm_PageObj(IWebDriver webDriver) : base(webDriver)
             {
             }
+            
             /// <summary>
             /// Fill new deal form
             /// </summary>
@@ -521,7 +532,7 @@ namespace PageObjSpace
             {
                 _webDriver.FindElement(list_client).Click();
                 _webDriver.FindElement(By.XPath("//div[@data-id=" + client_id + "]")).Click();
-                _webDriver.FindElement(area_comment).SendKeys("Comment");
+                _webDriver.FindElement(area_comment).SendKeys(rand_string(100));
                 for (int i = new Random().Next(products.Length / 3); i < products.Length / 3; i++)
                 {
                     _webDriver.FindElement(area_product).SendKeys(products[i].PartNum +
