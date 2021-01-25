@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -7,9 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="PageObjects\Новая папка\**" />
-    <EmbeddedResource Remove="PageObjects\Новая папка\**" />
-    <None Remove="PageObjects\Новая папка\**" />
+    <Compile Remove="PageObjects\**" />
+    <EmbeddedResource Remove="PageObjects\**" />
+    <None Remove="PageObjects\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="LoginTest.cs" />
+    <Compile Remove="SupplyTest.cs" />
+    <Compile Remove="TestTamplates.cs" />
   </ItemGroup>
 
   <ItemGroup>
