@@ -251,6 +251,12 @@ namespace PageObjSpace
                 Assert.IsTrue(div_inside[i].Text.IndexOf("Error") == -1, "new deal form have a error");
             }
         }
+        public NewDealPage_PageObj check_all_Div()
+        {
+            check_div(_webDriver);
+            _webDriver.FindElement(By.XPath("/html/body/div[3]/div[2]")).Click();
+            return new NewDealPage_PageObj(_webDriver);
+        }
 
         protected string rand_string(int length)
         {

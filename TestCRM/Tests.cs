@@ -81,10 +81,19 @@ namespace TestCRM
                     .check_all_Div()
                     .fill_newdeal_form()
                     .add_deal()
-                    .add_product()
                     .add_product_list()
                     .check_all_Div()
-                    .fill_list();
+                    .add_product_ImportXLS()
+                    .check_all_Div()
+                    .request_supply()
+                    .check_all_Div()
+                    .click_on_chip()
+                    .redact_checked()
+                    .check_all_Div()
+                    .ComplexProduct_from_checked()
+                    .check_all_Div()
+                    .ComplexProduct_from_XLS()
+                    .check_all_Div();
         }
         [TearDown]
         public void TearDown()

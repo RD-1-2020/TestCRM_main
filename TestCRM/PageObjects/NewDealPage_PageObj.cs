@@ -12,6 +12,7 @@ namespace PageObjSpace
 
         private readonly By button_product_list = By.XPath("//a[text()='Добавить списком']");
         private readonly By button_product_add = By.XPath("//input[@value='добавить']");
+        private readonly By button_Import_XLS = By.XPath("//a[text()='Импорт XLS']");
         private readonly By textarea_product_partno = By.XPath("//input[@id='deal-product-form-partNo']");
         private readonly By textarea_product_count = By.XPath("//input[@id='deal-product-form-amount']");
 
@@ -32,6 +33,15 @@ namespace PageObjSpace
             _webDriver.FindElement(button_product).Click();
             _webDriver.FindElement(button_product_list).Click();
             return new ProductListForm_PageObj(_webDriver);
+        }
+        /// <summary>
+        /// add product use a xls import
+        /// </summary>
+        /// <returns></returns>
+        public ImportXLSForm_PageObj add_product_ImportXLS()
+        {
+            _webDriver.FindElement(button_Import_XLS).Click();
+            return new ImportXLSForm_PageObj(_webDriver);
         }
         /// <summary>
         /// requets in supply on a supply page(go to-> supply form)
@@ -56,6 +66,24 @@ namespace PageObjSpace
                 _webDriver.FindElement(button_product_add).Click();
             }
             return new NewDealPage_PageObj(_webDriver);
+        }
+        public NewDealPage_PageObj click_on_chip() {
+            _webDriver.FindElement(By.XPath("/html/body/div[1]/div[1]/div[2]/div[5]/a")).Click();
+            return new NewDealPage_PageObj(_webDriver);
+        }
+        public RedactCheckedForm_PageObj redact_checked() {
+            _webDriver.FindElement(By.XPath("/html/body/div[1]/div[1]/div[2]/div[5]/div/menu/li[1]/a")).Click();
+            return new RedactCheckedForm_PageObj(_webDriver);
+        }
+        public ComplexProductForm_pageObj ComplexProduct_from_checked()
+        {
+            _webDriver.FindElement(By.XPath("/html/body/div[1]/div[1]/div[2]/div[5]/div/menu/li[2]/a")).Click();
+            return new ComplexProductForm_pageObj(_webDriver);
+        }
+        public ComplexProductXLSForm_PageObj ComplexProduct_from_XLS()
+        {
+            _webDriver.FindElement(By.XPath("/html/body/div[1]/div[1]/div[2]/div[5]/div/menu/li[3]/a")).Click();
+            return new ComplexProductXLSForm_PageObj(_webDriver);
         }
         /*public bool int_count_assert()
         {

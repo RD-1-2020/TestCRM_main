@@ -22,7 +22,7 @@ namespace PageObjSpace
         {
         }
         
-        public NewDealForm_PageObj check_all_Div() {
+        new public NewDealForm_PageObj check_all_Div() {
             check_div(_webDriver);
             return new NewDealForm_PageObj(_webDriver);
         }
