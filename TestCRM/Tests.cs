@@ -76,7 +76,8 @@ namespace TestCRM
         [Test]
         public void NewWindowTest(){
             (new LoginPage_PageObj(_webDriver)).Sign_in(0)
-                    .go_to_deal();
+                    .go_to_deal()
+                    .New_Deal();
         }
         [TearDown]
         public void TearDown()
