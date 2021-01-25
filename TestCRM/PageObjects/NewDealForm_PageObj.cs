@@ -32,7 +32,7 @@ namespace Prj_test.PageObjects
             _webDriver.FindElement(list_client).Click();
             _webDriver.FindElement(By.XPath("//div[@data-id="+ NavigationBar_PageObj.client_id+"]")).Click();
             _webDriver.FindElement(area_comment).SendKeys("Comment");
-            for (int i = new Random().Next(NavigationBar_PageObj.products.Length - 1); i < NavigationBar_PageObj.products.Length; i++)
+            for (int i = new Random().Next(NavigationBar_PageObj.products.Length/3); i < NavigationBar_PageObj.products.Length/3; i++)
             {
                 _webDriver.FindElement(area_product).SendKeys(NavigationBar_PageObj.products[i].PartNum +
                     "*" + NavigationBar_PageObj.products[i].count + "\n");

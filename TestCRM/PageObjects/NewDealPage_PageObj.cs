@@ -20,7 +20,7 @@ namespace Prj_test.PageObjects
         /// </summary>
         /// <returns>Redirect on a newdealpage</returns>
         public NewDealPage_PageObj fill_list() {
-            for (int i = new Random().Next(NavigationBar_PageObj.products.Length - 1); i < NavigationBar_PageObj.products.Length; i++)
+            for (int i = new Random().Next(NavigationBar_PageObj.products.Length*2/3, NavigationBar_PageObj.products.Length); i < NavigationBar_PageObj.products.Length; i++)
             {
                 _webDriver.FindElement(textarea_partno).SendKeys(products[i].PartNum+"\n");
                 _webDriver.FindElement(textarea_count).SendKeys(products[i].count + "\n");
@@ -59,7 +59,7 @@ namespace Prj_test.PageObjects
             return new Product_List_PageObj(_webDriver);
         }
         /// <summary>
-        /// requets in supply
+        /// requets in supply on a supply page(go to-> supply form)
         /// </summary>
         public SupplyForm_PageObj request_supply() {
             _webDriver.FindElement(button_supply).Click();
@@ -71,7 +71,7 @@ namespace Prj_test.PageObjects
         /// </summary>
         /// <returns></returns>
         public NewDealPage_PageObj add_product() {
-            for (int i = new Random().Next(NavigationBar_PageObj.products.Length - 1); i < NavigationBar_PageObj.products.Length; i++)
+            for (int i = new Random().Next(NavigationBar_PageObj.products.Length/3, NavigationBar_PageObj.products.Length*2/3); i < NavigationBar_PageObj.products.Length*2/3; i++)
             {
                 _webDriver.FindElement(button_product).Click();
                 _webDriver.FindElement(textarea_product_partno).SendKeys(products[i].PartNum);

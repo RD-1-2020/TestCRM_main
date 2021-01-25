@@ -193,6 +193,18 @@ namespace Prj_test.PageObjects
                 new Product.answer(answers_Provider_id[0],"0","0","$"),
                 new Product.answer(answers_Provider_id[1],"0","0","R")
             }
+            ),
+             new Product(client_id,"(SMD) 0603 1.1 M0m 1% / Тайвань", "Резистор", "0,05",ans_amount,
+            new Product.answer[]{
+                new Product.answer(answers_Provider_id[0],"0","0","$"),
+                new Product.answer(answers_Provider_id[1],"0","0","R")
+            }
+            ),
+             new Product(client_id,"(LZ-35V-180 uF-d08-105C / 035SHK151M0812", "Конденсатор", "1000",ans_amount,
+            new Product.answer[]{
+                new Product.answer(answers_Provider_id[0],"0","0","$"),
+                new Product.answer(answers_Provider_id[1],"0","0","R")
+            }
             )
             /*new Product("'598'","РезисторТест", "Резистор", "132", "1")*/
         };
