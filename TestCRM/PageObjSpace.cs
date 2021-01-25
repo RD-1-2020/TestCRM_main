@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Collections;
+using System.Threading;
 using OpenQA.Selenium;
 using NUnit.Framework;
 
 namespace PageObjSpace
-{
+{ 
     /// <summary>
     /// Login page
     /// </summary>
@@ -107,9 +108,10 @@ namespace PageObjSpace
             private readonly By button_warehouse_admin = By.XPath("//a[text()='Склад адм.']");
             private readonly By button_warehouse_M15 = By.XPath("//a[text()='M15']");
 
-            //Работа с кучей товаров массивы строк
-
-            public class Product
+            private readonly By button_exit = By.XPath("//a[@href='index.php?log_out=now']");
+        protected readonly By button_exit_js_new_window = By.XPath("//div[@class='window__close js-window__close']");
+        //Работа с кучей товаров массивы строк
+        public class Product
             {
                 public string id_client;
                 public string PartNum;
@@ -281,7 +283,7 @@ namespace PageObjSpace
             ),
             /*new Product("'598'","РезисторТест", "Резистор", "132", "1")*/
         };
-            private readonly By button_exit = By.XPath("//a[@href='index.php?log_out=now']");
+
 
             public NavigationBar_PageObj(IWebDriver webDriver)
             {
@@ -359,6 +361,27 @@ namespace PageObjSpace
     /// <summary>
     /// add product with list in deal form
     /// </summary>
+    public class ImportXLSForm_PageObj:NavigationBar_PageObj {
+        
+        public ImportXLSForm_PageObj(IWebDriver webDriver) : base(webDriver)
+        { }
+        public ImportXLSForm_PageObj check_NW() {
+            IWebElement[] div_inside = new IWebElement[_webDriver.FindElements(By.XPath("/html/body/div[@class='window__shadow js-window__shadow']//div")).Count];
+            _webDriver.FindElements(By.XPath("/html/body/div[@class='window__shadow js-window__shadow']//div")).CopyTo(div_inside, 0);
+            for (int i = 0; i < div_inside.Length; i++)
+            {
+                Assert.IsTrue(div_inside[i].Text.IndexOf("Notice") == -1, "new deal form have a notice");
+                Assert.IsTrue(div_inside[i].Text.IndexOf("Fatall Error") == -1, "new deal form have a fatall error");
+                Assert.IsTrue(div_inside[i].Text.IndexOf("Warning") == -1, "new deal form have a warning");
+                Assert.IsTrue(div_inside[i].Text.IndexOf("Error") == -1, "new deal form have a error");
+            }
+            return new ImportXLSForm_PageObj(_webDriver);
+        }
+        public new NewDealPage_PageObj exit() {
+            _webDriver.FindElement(button_exit_js_new_window).Click();
+            return new NewDealPage_PageObj(_webDriver);
+        }
+    }
     public class ProductListForm_PageObj : NavigationBar_PageObj
     {
         private readonly By textarea_count = By.XPath("//textarea[@name='amount']");
@@ -367,6 +390,19 @@ namespace PageObjSpace
         private readonly By button_add = By.XPath("//input[@value='Добавить']");
         public ProductListForm_PageObj(IWebDriver webDriver) : base(webDriver)
         {
+        }
+        public ProductListForm_PageObj check_NW()
+        {
+            IWebElement[] div_inside = new IWebElement[_webDriver.FindElements(By.XPath("/html/body/div[@class='window__shadow js-window__shadow']//div")).Count];
+            _webDriver.FindElements(By.XPath("/html/body/div[@class='window__shadow js-window__shadow']//div")).CopyTo(div_inside, 0);
+            for (int i = 0; i < div_inside.Length; i++)
+            {
+                Assert.IsTrue(div_inside[i].Text.IndexOf("Notice") == -1, "new deal form have a notice");
+                Assert.IsTrue(div_inside[i].Text.IndexOf("Fatall Error") == -1, "new deal form have a fatall error");
+                Assert.IsTrue(div_inside[i].Text.IndexOf("Warning") == -1, "new deal form have a warning");
+                Assert.IsTrue(div_inside[i].Text.IndexOf("Error") == -1, "new deal form have a error");
+            }
+            return new ProductListForm_PageObj(_webDriver);
         }
         /// <summary>
         /// Fill the list
@@ -393,6 +429,7 @@ namespace PageObjSpace
 
         private readonly By button_product_list = By.XPath("//a[text()='Добавить списком']");
         private readonly By button_product_add = By.XPath("//input[@value='добавить']");
+        private readonly By button_product_import_xls = By.XPath("//a[text()='Импорт XLS']");
         private readonly By textarea_product_partno = By.XPath("//input[@id='deal-product-form-partNo']");
         private readonly By textarea_product_count = By.XPath("//input[@id='deal-product-form-amount']");
 
@@ -404,6 +441,7 @@ namespace PageObjSpace
         public NewDealPage_PageObj(IWebDriver webDriver) : base(webDriver)
         {
         }
+
         /// <summary>
         /// Add product with list
         /// </summary>
@@ -437,6 +475,11 @@ namespace PageObjSpace
                 _webDriver.FindElement(button_product_add).Click();
             }
             return new NewDealPage_PageObj(_webDriver);
+        }
+        public ImportXLSForm_PageObj Add_xls_product() {
+            Thread.Sleep(1000);
+            _webDriver.FindElement(button_product_import_xls).Click();
+            return new ImportXLSForm_PageObj(_webDriver);
         }
         /*public bool int_count_assert()
         {
@@ -522,8 +565,20 @@ namespace PageObjSpace
             /// </summary>
             public NewDealForm_PageObj(IWebDriver webDriver) : base(webDriver)
             {
-            }
             
+            }
+        public NewDealForm_PageObj check_NW() {
+            IWebElement[] div_inside = new IWebElement[_webDriver.FindElements(By.XPath("/html/body/div[@class='window__shadow js-window__shadow']//div")).Count];
+            _webDriver.FindElements(By.XPath("/html/body/div[@class='window__shadow js-window__shadow']//div")).CopyTo(div_inside, 0);
+            for (int i = 0; i < div_inside.Length; i++)
+            {
+                Assert.IsTrue(div_inside[i].Text.IndexOf("Notice") == -1, "new deal form have a notice");
+                Assert.IsTrue(div_inside[i].Text.IndexOf("Fatall Error") == -1, "new deal form have a fatall error");
+                Assert.IsTrue(div_inside[i].Text.IndexOf("Warning") == -1, "new deal form have a warning");
+                Assert.IsTrue(div_inside[i].Text.IndexOf("Error") == -1, "new deal form have a error");
+            }
+            return new NewDealForm_PageObj(_webDriver);
+        }
             /// <summary>
             /// Fill new deal form
             /// </summary>
@@ -549,6 +604,7 @@ namespace PageObjSpace
                 _webDriver.FindElement(button_new_deal).Click();
                 return new NewDealPage_PageObj(_webDriver);
             }
+            
         }
     /// <summary>
     /// One deal page
@@ -559,6 +615,7 @@ namespace PageObjSpace
 
         public DealPage_PageObj(IWebDriver webDriver) : base(webDriver)
         {
+            
         }
         /// <summary>
         /// Do new deal

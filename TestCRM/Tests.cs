@@ -73,6 +73,22 @@ namespace TestCRM
                 .open_supply_deal()
                 .take_in_work();
         }
+        [Test]
+        public void JSNewWindowDealTest() {
+            new LoginPage_PageObj(_webDriver).Sign_in(0)
+                .go_to_deal()
+                .New_Deal()
+                .check_NW()
+                .fill_newdeal_form()
+                .add_deal()
+                .add_product()
+                .add_product_list()
+                .check_NW()
+                .fill_list()
+                .Add_xls_product()
+                .check_NW()
+                .exit();
+        }
         [TearDown]
         public void TearDown()
         {
