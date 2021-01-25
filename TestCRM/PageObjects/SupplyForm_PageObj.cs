@@ -8,7 +8,7 @@ namespace PageObjSpace
     /// <summary>
     /// form included a button supply in a deal page
     /// </summary>
-    public class SupplyForm_PageObj
+    class SupplyForm_PageObj
     {
         private IWebDriver _webDriver;
         private readonly By button_request_send = By.XPath("//input[@value='Создать заявку']");

@@ -7,7 +7,7 @@ namespace PageObjSpace
     /// <summary>
     /// page supply included from a supply button in navigation bar
     /// </summary>
-    public class SupplyPage_PageObj : NavigationBar_PageObj
+    class SupplyPage_PageObj : NavigationBar_PageObj
     {
 
         static private string deal_id;

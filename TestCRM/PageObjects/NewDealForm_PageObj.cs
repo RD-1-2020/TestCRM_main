@@ -5,7 +5,7 @@ using OpenQA.Selenium;
 using System.Threading;
 namespace PageObjSpace
 {
-    public class NewDealForm_PageObj : NavigationBar_PageObj
+    class NewDealForm_PageObj : NavigationBar_PageObj
     {
         //Execute numdeal element
         private readonly By input_numdeal = By.XPath("//input[@id='undefined-title']");

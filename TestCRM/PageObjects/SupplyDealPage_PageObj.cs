@@ -5,7 +5,7 @@ using System.Text;
 
 namespace PageObjSpace
 {
-    public class SupplyDealPage_PageObj : NavigationBar_PageObj
+    class SupplyDealPage_PageObj : NavigationBar_PageObj
     {
         private readonly By button_take_in_work = By.XPath("//a[text()='Взять в работу']");
 

@@ -7,7 +7,7 @@ using System.Text;
 /// </summary>
 namespace PageObjSpace
 {
-    public class CalendarPage_PageObj : NavigationBar_PageObj
+         class CalendarPage_PageObj : NavigationBar_PageObj
     {
         public CalendarPage_PageObj(IWebDriver webDriver) : base(webDriver)
         {

@@ -5,7 +5,7 @@ using OpenQA.Selenium;
 
 namespace PageObjSpace
 {
-    public class ProductListForm_PageObj : NavigationBar_PageObj
+    class ProductListForm_PageObj : NavigationBar_PageObj
     {
         private readonly By textarea_count = By.XPath("//textarea[@name='amount']");
         private readonly By textarea_partno = By.XPath("//textarea[@name='partNo']");

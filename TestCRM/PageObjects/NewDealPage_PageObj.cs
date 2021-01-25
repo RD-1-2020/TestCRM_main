@@ -6,7 +6,7 @@ using System.Threading;
 
 namespace PageObjSpace
 {
-    public class NewDealPage_PageObj : NavigationBar_PageObj
+     class NewDealPage_PageObj : NavigationBar_PageObj
     {
         private readonly By button_product = By.XPath("//a[@data-toggle='.deal-proposal-add']");
 

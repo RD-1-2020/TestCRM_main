@@ -3,8 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Prj_test.PageObjects
-{
+namespace PageObjSpace { 
     /// <summary>
     /// Login Page
     /// </summary>

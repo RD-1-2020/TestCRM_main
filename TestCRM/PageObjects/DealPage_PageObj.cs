@@ -5,7 +5,7 @@ using Prj_test;
 using OpenQA.Selenium;
 namespace PageObjSpace
 {
-    public class DealPage_PageObj : NavigationBar_PageObj
+     class DealPage_PageObj : NavigationBar_PageObj
     {
         private readonly By button_newdeal = By.XPath("//a[text()=' Новая сделка']");
 

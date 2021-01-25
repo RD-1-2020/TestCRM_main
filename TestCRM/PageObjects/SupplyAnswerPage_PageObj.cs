@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using OpenQA.Selenium;
 
-namespace Prj_test.PageObjects
+namespace PageObjSpace
 {
     class SupplyAnswerPage_PageObj : NavigationBar_PageObj
     {

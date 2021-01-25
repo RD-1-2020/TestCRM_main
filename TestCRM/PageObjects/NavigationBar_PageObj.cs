@@ -8,7 +8,7 @@ namespace PageObjSpace
     /// <summary>
     /// Navigation bar
     /// </summary>
-    public class NavigationBar_PageObj
+    class NavigationBar_PageObj
     {
         protected IWebDriver _webDriver;
 
