@@ -17,11 +17,9 @@ namespace Prj_test.PageObjects
         /// <summary>
         /// Number deal 
         /// </summary>
-        private int num_deal;
         private IWebDriver _webDriver;
-        public NewDealForm_PageObj(IWebDriver webDriver, int _numdeal) {
+        public NewDealForm_PageObj(IWebDriver webDriver) {
             _webDriver = webDriver;
-            num_deal = _numdeal;
 
         }
         /// <summary>
@@ -31,16 +29,15 @@ namespace Prj_test.PageObjects
         /// <returns></returns>
         
         public NewDealForm_PageObj fill_newdeal_form() {
-            Thread.Sleep(1000);
             _webDriver.FindElement(list_client).Click();
-            _webDriver.FindElement(By.XPath("//div[@data-id="+ NavigationBar_PageObj.deals[num_deal].id_client+"]")).Click();
-            _webDriver.FindElement(area_comment).SendKeys(NavigationBar_PageObj.deals[num_deal].comment);
-            for (int i = 0; i < 2; i++)
+            _webDriver.FindElement(By.XPath("//div[@data-id="+ NavigationBar_PageObj.client_id+"]")).Click();
+            _webDriver.FindElement(area_comment).SendKeys("Comment");
+            for (int i = new Random().Next(NavigationBar_PageObj.products.Length/3); i < NavigationBar_PageObj.products.Length/3; i++)
             {
-                _webDriver.FindElement(area_product).SendKeys(NavigationBar_PageObj.deals[num_deal].products.partNo[i] +
-                    "*" + NavigationBar_PageObj.deals[num_deal].products.count[i] + "\n");
+                _webDriver.FindElement(area_product).SendKeys(NavigationBar_PageObj.products[i].PartNum +
+                    "*" + NavigationBar_PageObj.products[i].count + "\n");
             }
-            return new NewDealForm_PageObj(_webDriver, num_deal);
+            return new NewDealForm_PageObj(_webDriver);
         }
         /// <summary>
         /// Post deal fill add deal
@@ -48,7 +45,7 @@ namespace Prj_test.PageObjects
         /// <returns>Redirect on a deal page</returns>
         public NewDealPage_PageObj add_deal() {
             _webDriver.FindElement(button_new_deal).Click();
-            return new NewDealPage_PageObj(_webDriver, num_deal);
+            return new NewDealPage_PageObj(_webDriver);
         } 
     }
 }
