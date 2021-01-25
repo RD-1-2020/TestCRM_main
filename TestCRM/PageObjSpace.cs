@@ -7,6 +7,9 @@ using NUnit.Framework;
 
 namespace PageObjSpace
 {
+    /// <summary>
+    /// Login page
+    /// </summary>
     public class LoginPage_PageObj
     {
         /// <summary>
@@ -68,7 +71,7 @@ namespace PageObjSpace
     }
 
     /// <summary>
-    /// init navbar
+    /// Navigation bar
     /// </summary>
     public class NavigationBar_PageObj
         {
@@ -335,20 +338,25 @@ namespace PageObjSpace
                 return new LoginPage_PageObj(_webDriver);
             }
     }
+    /// <summary>
+    /// Calendar page
+    /// </summary>
     public class CalendarPage_PageObj : NavigationBar_PageObj
     {
         public CalendarPage_PageObj(IWebDriver webDriver) : base(webDriver)
         {
         }
     }
-
-    public class Product_List_PageObj : NavigationBar_PageObj
+    /// <summary>
+    /// add product with list in deal form
+    /// </summary>
+    public class ProductListForm_PageObj : NavigationBar_PageObj
     {
         private readonly By textarea_count = By.XPath("//textarea[@name='amount']");
         private readonly By textarea_partno = By.XPath("//textarea[@name='partNo']");
         private readonly By textarea_category = By.XPath("//textarea[@name='productCategory']");
         private readonly By button_add = By.XPath("//input[@value='Добавить']");
-        public Product_List_PageObj(IWebDriver webDriver) : base(webDriver)
+        public ProductListForm_PageObj(IWebDriver webDriver) : base(webDriver)
         {
         }
         /// <summary>
@@ -367,6 +375,9 @@ namespace PageObjSpace
             return new NewDealPage_PageObj(_webDriver);
         }
     }
+    /// <summary>
+    /// Deal page
+    /// </summary>
     public class NewDealPage_PageObj : NavigationBar_PageObj
     {
         private readonly By button_product = By.XPath("//a[@data-toggle='.deal-proposal-add']");
@@ -389,11 +400,11 @@ namespace PageObjSpace
         /// Add product with list
         /// </summary>
         /// <returns>Redirect on a Product list</returns>
-        public Product_List_PageObj add_product_list()
+        public ProductListForm_PageObj add_product_list()
         {
             _webDriver.FindElement(button_product).Click();
             _webDriver.FindElement(button_product_list).Click();
-            return new Product_List_PageObj(_webDriver);
+            return new ProductListForm_PageObj(_webDriver);
         }
         /// <summary>
         /// requets in supply on a supply page(go to-> supply form)
@@ -465,6 +476,30 @@ namespace PageObjSpace
             }
         } */
     }
+    /// <summary>
+    /// form included a button supply in a deal page
+    /// </summary>
+    public class SupplyForm_PageObj
+    {
+        private IWebDriver _webDriver;
+        private readonly By button_request_send = By.XPath("//input[@value='Создать заявку']");
+        public SupplyForm_PageObj(IWebDriver webDriver, int _num_deal)
+        {
+            _webDriver = webDriver;
+        }
+        /// <summary>
+        /// Post fill(no important) form click on a button "add"
+        /// </summary>
+        /// <returns></returns>
+        public NewDealPage_PageObj send_request()
+        {
+            _webDriver.FindElement(button_request_send).Click();
+            return new NewDealPage_PageObj(_webDriver);
+        }
+    }
+    /// <summary>
+    /// Button add new deal include this form
+    /// </summary>
     public class NewDealForm_PageObj
         {
             //Execute numdeal element
@@ -511,6 +546,9 @@ namespace PageObjSpace
                 return new NewDealPage_PageObj(_webDriver);
             }
         }
+    /// <summary>
+    /// One deal page
+    /// </summary>
     public class DealPage_PageObj : NavigationBar_PageObj
     {
         private readonly By button_newdeal = By.XPath("//a[text()=' Новая сделка']");
@@ -528,51 +566,9 @@ namespace PageObjSpace
             return new NewDealForm_PageObj(_webDriver);
         }
     }
-    public class SupplyDealPage_PageObj : NavigationBar_PageObj
-    {
-        class answer_Viaco
-        {
-            string[] price;
-            string[] delivery_time;
-            string[] add1;
-            string[] add2;
-        }
-        private readonly By button_take_in_work = By.XPath("//a[text()='Взять в работу']");
-
-        private readonly By button_request_provider = By.XPath("//span[text()='Отправить заявку поставщику']");
-        //Реализовать!!!
-        /* public ProviderRequestForm_PageObj request_provider() { 
-
-         }*/
-        private string deal_id;
-        public SupplyDealPage_PageObj(IWebDriver webDriver, string id) : base(webDriver)
-        {
-            deal_id = id;
-        }
-        public SupplyDealPage_PageObj take_in_work()
-        {
-            _webDriver.FindElement(button_take_in_work).Click();
-            return new SupplyDealPage_PageObj(_webDriver, deal_id);
-        }
-    }
-    public class SupplyForm_PageObj
-    {
-        private IWebDriver _webDriver;
-        private readonly By button_request_send = By.XPath("//input[@value='Создать заявку']");
-        public SupplyForm_PageObj(IWebDriver webDriver, int _num_deal)
-        {
-            _webDriver = webDriver;
-        }
-        /// <summary>
-        /// Post fill(no important) form click on a button "add"
-        /// </summary>
-        /// <returns></returns>
-        public NewDealPage_PageObj send_request()
-        {
-            _webDriver.FindElement(button_request_send).Click();
-            return new NewDealPage_PageObj(_webDriver);
-        }
-    }
+    /// <summary>
+    /// page supply included from a supply button in navigation bar
+    /// </summary>
     public class SupplyPage_PageObj : NavigationBar_PageObj
     {
 
@@ -593,6 +589,28 @@ namespace PageObjSpace
 
 
     }
+    /// <summary>
+    /// supply page of deal 
+    /// </summary>
+    public class SupplyDealPage_PageObj : NavigationBar_PageObj
+    {
+        private readonly By button_take_in_work = By.XPath("//a[text()='Взять в работу']");
 
+        private readonly By button_request_provider = By.XPath("//span[text()='Отправить заявку поставщику']");
+        //Реализовать!!!
+        /* public ProviderRequestForm_PageObj request_provider() { 
+
+         }*/
+        private string deal_id;
+        public SupplyDealPage_PageObj(IWebDriver webDriver, string id) : base(webDriver)
+        {
+            deal_id = id;
+        }
+        public SupplyDealPage_PageObj take_in_work()
+        {
+            _webDriver.FindElement(button_take_in_work).Click();
+            return new SupplyDealPage_PageObj(_webDriver, deal_id);
+        }
+    }
 }
    
