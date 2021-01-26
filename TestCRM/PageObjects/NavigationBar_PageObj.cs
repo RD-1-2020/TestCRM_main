@@ -245,10 +245,10 @@ namespace PageObjSpace
             _webDriver.FindElements(By.XPath("/html/body/div[@class='window__shadow js-window__shadow']//div")).CopyTo(div_inside, 0);
             for (int i = 0; i < div_inside.Length; i++)
             {
-                Assert.IsTrue(div_inside[i].Text.IndexOf("Notice") == -1, "form have a notice");
-                Assert.IsTrue(div_inside[i].Text.IndexOf("Fatal error") == -1, "form have a fatall error");
-                Assert.IsTrue(div_inside[i].Text.IndexOf("Warning") == -1, "form have a warning");
-                Assert.IsTrue(div_inside[i].Text.IndexOf("Error") == -1, "form have a error");
+                Assert.IsTrue(div_inside[i].Text.IndexOf("Notice") == -1,i.ToString() + "div have a notice");
+                Assert.IsTrue(div_inside[i].Text.IndexOf("Fatal error") == -1, i.ToString() + "div have a fatall error");
+                Assert.IsTrue(div_inside[i].Text.IndexOf("Warning") == -1, i.ToString() + "div have a warning");
+                Assert.IsTrue(div_inside[i].Text.IndexOf("Error") == -1, i.ToString() + "div have a error");
             }
         }
         public NewDealPage_PageObj check_all_Div()
