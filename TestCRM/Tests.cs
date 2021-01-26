@@ -9,6 +9,7 @@ namespace TestCRM
     {
         private IWebDriver _webDriver;
         [SetUp]
+
         public void Setup()
         {
             _webDriver = new OpenQA.Selenium.Firefox.FirefoxDriver();
@@ -75,7 +76,7 @@ namespace TestCRM
         }
         [Test]
         public void NewWindowDealTest(){
-            (new LoginPage_PageObj(_webDriver)).Sign_in(0)
+            new LoginPage_PageObj(_webDriver).Sign_in(0)
                     .go_to_deal()
                     .New_Deal()
                     .check_all_Div()

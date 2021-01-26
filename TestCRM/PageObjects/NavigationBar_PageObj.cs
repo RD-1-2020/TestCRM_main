@@ -250,6 +250,8 @@ namespace PageObjSpace
                 Assert.IsTrue(div_inside[i].Text.IndexOf("Warning") == -1, i.ToString() + "div have a warning");
                 Assert.IsTrue(div_inside[i].Text.IndexOf("Error") == -1, i.ToString() + "div have a error");
             }
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
         }
         public NewDealPage_PageObj check_all_Div()
         {
