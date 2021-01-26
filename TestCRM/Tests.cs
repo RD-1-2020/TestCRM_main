@@ -93,6 +93,22 @@ namespace TestCRM
                     .ComplexProduct_from_checked()
                     .check_all_Div()
                     .ComplexProduct_from_XLS()
+                    .check_all_Div()
+                    .go_to_offer()
+                    .Open_Offer_Menu()
+                    .Add_offer_Provider()
+                    .check_all_Div()
+                    .Add_offer_List()
+                    .check_all_Div()
+                    .Add_offer_XLS()
+                    .check_all_Div()
+                    .go_to_order()
+                    .open_shipment_form()
+                    .check_all_Div()
+                    .go_to_info()
+                    /*.open_redact_checked()
+                    .check_all_Div()*///500 div,very slow!
+                    .open_redact_list()
                     .check_all_Div();
         }
         [TearDown]

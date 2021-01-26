@@ -226,7 +226,7 @@ namespace PageObjSpace
             ///Check a body text
             String bodyText = _webDriver.FindElement(By.TagName("body")).Text;
             Assert.IsTrue(bodyText.IndexOf("Notice") == -1, "body page have a notice");
-            Assert.IsTrue(bodyText.IndexOf("Fatall Error") == -1, "body page have a fatall error");
+            Assert.IsTrue(bodyText.IndexOf("Fatal error") == -1, "body page have a fatall error");
             Assert.IsTrue(bodyText.IndexOf("Warning") == -1, "body page have a warning");
             Assert.IsTrue(bodyText.IndexOf("Error") == -1, "body page have a error");
 
@@ -245,10 +245,10 @@ namespace PageObjSpace
             _webDriver.FindElements(By.XPath("/html/body/div[@class='window__shadow js-window__shadow']//div")).CopyTo(div_inside, 0);
             for (int i = 0; i < div_inside.Length; i++)
             {
-                Assert.IsTrue(div_inside[i].Text.IndexOf("Notice") == -1, "new deal form have a notice");
-                Assert.IsTrue(div_inside[i].Text.IndexOf("Fatall Error") == -1, "new deal form have a fatall error");
-                Assert.IsTrue(div_inside[i].Text.IndexOf("Warning") == -1, "new deal form have a warning");
-                Assert.IsTrue(div_inside[i].Text.IndexOf("Error") == -1, "new deal form have a error");
+                Assert.IsTrue(div_inside[i].Text.IndexOf("Notice") == -1, "form have a notice");
+                Assert.IsTrue(div_inside[i].Text.IndexOf("Fatal error") == -1, "form have a fatall error");
+                Assert.IsTrue(div_inside[i].Text.IndexOf("Warning") == -1, "form have a warning");
+                Assert.IsTrue(div_inside[i].Text.IndexOf("Error") == -1, "form have a error");
             }
         }
         public NewDealPage_PageObj check_all_Div()
@@ -257,7 +257,8 @@ namespace PageObjSpace
             _webDriver.FindElement(By.XPath("/html/body/div[3]/div[2]")).Click();
             return new NewDealPage_PageObj(_webDriver);
         }
-
+        
+        
         protected string rand_string(int length)
         {
             string drink = "";

@@ -5,9 +5,9 @@ using System.Text;
 
 namespace PageObjSpace
 {
-    class RedactCheckedForm_PageObj : NavigationBar_PageObj
+    class InfoRedactListForm_PageObj : NewDealInfoPage_PageObj
     {
-        public RedactCheckedForm_PageObj(IWebDriver webDriver) : base(webDriver)
+        public InfoRedactListForm_PageObj(IWebDriver webDriver) : base(webDriver)
         {
         }
     }

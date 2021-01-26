@@ -10,7 +10,6 @@ namespace PageObjSpace
     /// </summary>
     class SupplyForm_PageObj : NavigationBar_PageObj
     {
-        private IWebDriver _webDriver;
         private readonly By button_request_send = By.XPath("//input[@value='Создать заявку']");
         public SupplyForm_PageObj(IWebDriver webDriver) : base (webDriver)
         {

@@ -56,7 +56,7 @@ namespace PageObjSpace
         /// Add product on page
         /// </summary>
         /// <returns></returns>
-        public NewDealPage_PageObj add_product()
+            public NewDealPage_PageObj add_product()
         {
             for (int i = new Random().Next(products.Length / 3, products.Length * 2 / 3); i < products.Length * 2 / 3; i++)
             {
@@ -67,23 +67,41 @@ namespace PageObjSpace
             }
             return new NewDealPage_PageObj(_webDriver);
         }
-        public NewDealPage_PageObj click_on_chip() {
+            public NewDealPage_PageObj click_on_chip() {
             _webDriver.FindElement(By.XPath("/html/body/div[1]/div[1]/div[2]/div[5]/a")).Click();
             return new NewDealPage_PageObj(_webDriver);
         }
-        public RedactCheckedForm_PageObj redact_checked() {
+            public DealRedactCheckedForm_PageObj redact_checked() {
             _webDriver.FindElement(By.XPath("/html/body/div[1]/div[1]/div[2]/div[5]/div/menu/li[1]/a")).Click();
-            return new RedactCheckedForm_PageObj(_webDriver);
+            return new DealRedactCheckedForm_PageObj(_webDriver);
         }
-        public ComplexProductForm_pageObj ComplexProduct_from_checked()
+            public ComplexProductForm_pageObj ComplexProduct_from_checked()
         {
             _webDriver.FindElement(By.XPath("/html/body/div[1]/div[1]/div[2]/div[5]/div/menu/li[2]/a")).Click();
             return new ComplexProductForm_pageObj(_webDriver);
         }
-        public ComplexProductXLSForm_PageObj ComplexProduct_from_XLS()
-        {
+            public ComplexProductXLSForm_PageObj ComplexProduct_from_XLS(){
             _webDriver.FindElement(By.XPath("/html/body/div[1]/div[1]/div[2]/div[5]/div/menu/li[3]/a")).Click();
             return new ComplexProductXLSForm_PageObj(_webDriver);
+        }
+            public NewDealPage_PageObj go_to_dealpage() {
+            _webDriver.FindElement(By.XPath("/html/body/div[1]/div[1]/div[1]/a[1]")).Click();
+            return new NewDealPage_PageObj(_webDriver);
+        }
+            public NewDealOfferPage_PageObj go_to_offer() {
+            _webDriver.FindElement(By.XPath("//a[text()='Предложение']")).Click();
+            return new NewDealOfferPage_PageObj(_webDriver);
+        }
+            public NewDealOrderPage_PageObj go_to_order(){
+            check_div(_webDriver);
+            _webDriver.FindElement(By.XPath("/html/body/div[1]/div[1]/div[1]/a[3]")).Click();
+            return new NewDealOrderPage_PageObj(_webDriver);
+        }
+            public NewDealInfoPage_PageObj go_to_info(){
+            check_div(_webDriver);
+            _webDriver.FindElement(By.XPath("/html/body/div[1]/div[1]/div[1]/a[4]")).Click();
+            return new NewDealInfoPage_PageObj(_webDriver);
+        }
         }
         /*public bool int_count_assert()
         {
@@ -131,4 +149,3 @@ namespace PageObjSpace
             }
         } */
     }
-}
